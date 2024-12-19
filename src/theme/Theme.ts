@@ -14,7 +14,7 @@ export type Colors = typeof lightThemeColors;
  */
 const theme: ThemeWithMode = {
   light: {
-    primary: colors.roseVale,
+    primary: colors.violet,
     text: colors.darkCharcole,
     background: colors.white,
     backgroundSecondary: colors.cultured,
