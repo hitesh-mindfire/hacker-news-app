@@ -11,6 +11,11 @@ export type BottomTabParamList = {
   Profile: undefined;
 };
 
+export type DrawerParamList = {
+  New: undefined;
+  Past: undefined;
+};
+
 export interface NavigationProps
   extends Partial<React.ComponentProps<typeof NavigationContainer>> {}
 
