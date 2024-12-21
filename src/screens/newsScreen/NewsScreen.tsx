@@ -25,18 +25,21 @@ const NewsScreen: FC<TabScreenProps<"News">> = () => {
               <Header
                 headerText={options.title}
                 leftBtnIcon={faBars}
-                rightBtnIcon={faUser}
                 onPressLeft={navigation.openDrawer}
               />
             );
           },
           drawerStyle: styles.drawerContainer,
+          drawerActiveTintColor: colors.primary,
+          drawerInactiveTintColor: colors.tertiary,
         }}
       >
         <Drawer.Screen
           name="New"
           component={NewScreen}
-          options={{ title: "New news" }}
+          options={{
+            title: "New news",
+          }}
         />
         <Drawer.Screen
           name="Past"

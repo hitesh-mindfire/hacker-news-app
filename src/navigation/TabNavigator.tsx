@@ -54,7 +54,6 @@ export const TabNavigator = () => {
             <FontAwesomeIcon icon={faNewspaper} size={20} color={color} />
           ),
           title: "News",
-          headerShown: false,
         }}
       />
 
