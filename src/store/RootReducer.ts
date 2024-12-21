@@ -1,7 +1,6 @@
-import { persistReducer } from "redux-persist";
 import { UnknownAction, combineSlices } from "@reduxjs/toolkit";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { authSlice } from "./slices/AuthSlice";
+import { persistedNewsReducer } from "./slices/NewsSlice";
 export const RESET_STATE = "RESET_STATE";
 
 export const resetState = () => {
@@ -11,19 +10,10 @@ export const resetState = () => {
 };
 
 /**
- * persistence config for auth reducer
- */
-const persistAuthConfig = {
-  key: "auth",
-  storage: AsyncStorage,
-  whitelist: ["isAuthenticated"],
-};
-
-/**
  * Combine all the reducers
  */
 const appReducer = combineSlices({
-  auth: persistReducer(persistAuthConfig, authSlice.reducer),
+  news: persistedNewsReducer,
 });
 
 /**
