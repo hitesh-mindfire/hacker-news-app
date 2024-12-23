@@ -1,4 +1,3 @@
-export * from "./newsScreen/NewsScreen";
+export * from "./mainNewsScreen/MainNewsScreen";
 export * from "./profileScreen/ProfileScreen";
-export * from "./newScreen/NewScreen";
-export * from "./pastScreen/PastScreen";
+export * from "./newsContentScreen/NewsContentScreen";

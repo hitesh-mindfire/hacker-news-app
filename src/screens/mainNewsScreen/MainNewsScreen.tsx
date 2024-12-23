@@ -5,8 +5,7 @@ import { useTheme } from "@react-navigation/native";
 import { Colors } from "src/theme";
 import { Platform, StyleSheet } from "react-native";
 import { DrawerParamList, TabScreenProps } from "src/types";
-import { NewScreen } from "../newScreen/NewScreen";
-import { PastScreen } from "../pastScreen/PastScreen";
+import { NewsContentScreen } from "../newsContentScreen/NewsContentScreen";
 import { Header } from "src/components/Header";
 
 const Drawer = createDrawerNavigator<DrawerParamList>();
@@ -25,23 +24,28 @@ const NewsScreen: FC<TabScreenProps<"News">> = () => {
               <Header
                 headerText={options.title}
                 leftBtnIcon={faBars}
-                rightBtnIcon={faUser}
                 onPressLeft={navigation.openDrawer}
               />
             );
           },
           drawerStyle: styles.drawerContainer,
+          drawerActiveTintColor: colors.primary,
+          drawerInactiveTintColor: colors.tertiary,
         }}
       >
         <Drawer.Screen
           name="New"
-          component={NewScreen}
-          options={{ title: "New news" }}
+          component={NewsContentScreen}
+          options={{
+            title: "New news",
+          }}
+          initialParams={{ content: "New" }}
         />
         <Drawer.Screen
           name="Past"
-          component={PastScreen}
+          component={NewsContentScreen}
           options={{ title: "Past news" }}
+          initialParams={{ content: "Past" }}
         />
       </Drawer.Navigator>
     </>

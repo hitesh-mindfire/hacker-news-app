@@ -69,7 +69,7 @@ const makeStyles = (colors: Colors) =>
       fontSize: verticalScale(20),
       justifyContent: "center",
       alignItems: "center",
-      color: colors.text,
+      color: colors.tertiary,
       fontFamily: typography.medium,
     },
     leftView: {

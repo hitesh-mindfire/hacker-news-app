@@ -1,6 +1,7 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
+import { DrawerScreenProps } from "@react-navigation/drawer";
 
 export type RootStackParamList = {
   Home: undefined;
@@ -12,9 +13,13 @@ export type BottomTabParamList = {
 };
 
 export type DrawerParamList = {
-  New: undefined;
-  Past: undefined;
+  New: { content: string };
+  Past: { content: string };
 };
+export type DrawerProps<T extends keyof DrawerParamList> = DrawerScreenProps<
+  DrawerParamList,
+  T
+>;
 
 export interface NavigationProps
   extends Partial<React.ComponentProps<typeof NavigationContainer>> {}

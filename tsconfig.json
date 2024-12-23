@@ -7,11 +7,16 @@
       "*": ["./*"],
       "root/*": ["./*"],
       "src/*": ["src/*"],
+      "api": ["./src/api"],
       "assets/*": ["./src/assets/*"],
       "navigation": ["./src/navigation"],
       "screens": ["./src/screens"],
+      "theme": ["./src/theme"],
       "theme/*": ["./src/theme/*"],
-      "utils": ["./src/utils"]
+      "utils": ["./src/utils"],
+      "store": ["./src/store"],
+      "store/*": ["./src/store/*"],
+      "slices/*": ["./src/store/slices/*"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"]

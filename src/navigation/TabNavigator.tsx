@@ -5,7 +5,7 @@ import { faNewspaper, faUser } from "@fortawesome/free-solid-svg-icons";
 
 import { BottomTabParamList } from "../types";
 import { useTheme } from "@react-navigation/native";
-import NewsScreen from "src/screens/newsScreen/NewsScreen";
+import NewsScreen from "src/screens/mainNewsScreen/MainNewsScreen";
 import { ProfileScreen } from "src/screens";
 import { Header } from "src/components/Header";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -54,7 +54,6 @@ export const TabNavigator = () => {
             <FontAwesomeIcon icon={faNewspaper} size={20} color={color} />
           ),
           title: "News",
-          headerShown: false,
         }}
       />
 
