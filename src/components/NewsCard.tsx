@@ -1,18 +1,32 @@
-import { useTheme } from "@react-navigation/native";
+import {
+  useNavigation,
+  useTheme,
+  NavigationProp,
+} from "@react-navigation/native";
 import React, { FC } from "react";
 import { View, Text, StyleSheet, TextStyle } from "react-native";
 import { Colors, fontSize, spacing, typography } from "src/theme";
 import { NewsCardProps } from "src/types/NewsTypes";
+import { RootStackParamList } from "src/types";
 import { getRelativeTime } from "src/utils";
 
 export const NewsCard: FC<NewsCardProps> = ({ newsItem }) => {
   const { colors } = useTheme();
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const styles = makeStyles(colors);
   const relativeTime = getRelativeTime(newsItem?.time);
 
+  const handlePress = () => {
+    if (newsItem?.url) {
+      navigation.navigate("WebViewScreen", { params: { url: newsItem.url } });
+    } else {
+      alert("No URL available for this news.");
+    }
+  };
+
   return (
     <View style={styles.item}>
-      <Text style={styles.titleText} numberOfLines={2}>
+      <Text style={styles.titleText} numberOfLines={2} onPress={handlePress}>
         {newsItem?.title || "No title available"}
       </Text>
       <View style={styles.infoRow}>
