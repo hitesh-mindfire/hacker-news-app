@@ -5,6 +5,7 @@ import { DrawerScreenProps } from "@react-navigation/drawer";
 
 export type RootStackParamList = {
   Home: undefined;
+  WebViewScreen: { params: { url: string } };
 };
 
 export type BottomTabParamList = {

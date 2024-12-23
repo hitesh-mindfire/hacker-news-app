@@ -19,6 +19,7 @@ import {
   fetchNewNewsIds,
   fetchPastNewsIds,
 } from "src/store/actions/NewsActions";
+import { Spinner } from "./Spinner";
 
 export const NewsList: FC<NewsListProps> = ({ newsType }) => {
   const { colors } = useTheme();
@@ -92,11 +93,11 @@ export const NewsList: FC<NewsListProps> = ({ newsType }) => {
     }
     setRefreshing(false);
   };
-
+  console.log(isFetchingMore, page, "page");
   if (isFetchingMore && page == 0) {
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color={colors.primary} />
+        <Spinner loading />
       </View>
     );
   }
@@ -110,11 +111,7 @@ export const NewsList: FC<NewsListProps> = ({ newsType }) => {
         contentContainerStyle={styles.list}
         onEndReached={loadMorenews}
         onEndReachedThreshold={0.5}
-        ListFooterComponent={
-          isFetchingMore ? (
-            <ActivityIndicator size="small" color={colors.primary} />
-          ) : null
-        }
+        ListFooterComponent={isFetchingMore ? <Spinner loading /> : null}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
