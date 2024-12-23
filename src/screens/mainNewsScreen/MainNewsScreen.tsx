@@ -5,8 +5,7 @@ import { useTheme } from "@react-navigation/native";
 import { Colors } from "src/theme";
 import { Platform, StyleSheet } from "react-native";
 import { DrawerParamList, TabScreenProps } from "src/types";
-import { NewScreen } from "../newScreen/NewScreen";
-import { PastScreen } from "../pastScreen/PastScreen";
+import { NewsContentScreen } from "../newsContentScreen/NewsContentScreen";
 import { Header } from "src/components/Header";
 
 const Drawer = createDrawerNavigator<DrawerParamList>();
@@ -36,15 +35,17 @@ const NewsScreen: FC<TabScreenProps<"News">> = () => {
       >
         <Drawer.Screen
           name="New"
-          component={NewScreen}
+          component={NewsContentScreen}
           options={{
             title: "New news",
           }}
+          initialParams={{ content: "New" }}
         />
         <Drawer.Screen
           name="Past"
-          component={PastScreen}
+          component={NewsContentScreen}
           options={{ title: "Past news" }}
+          initialParams={{ content: "Past" }}
         />
       </Drawer.Navigator>
     </>

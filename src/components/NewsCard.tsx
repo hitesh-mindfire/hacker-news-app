@@ -8,16 +8,16 @@ import { getRelativeTime } from "src/utils";
 export const NewsCard: FC<NewsCardProps> = ({ newsItem }) => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
-  const relativeTime = getRelativeTime(newsItem.time);
+  const relativeTime = getRelativeTime(newsItem?.time);
 
   return (
     <View style={styles.item}>
       <Text style={styles.titleText} numberOfLines={2}>
-        {newsItem.title || "No title available"}
+        {newsItem?.title || "No title available"}
       </Text>
       <View style={styles.infoRow}>
         <Text style={styles.authorText}>
-          {newsItem?.score || 0} point by {newsItem.by || "user"}
+          {newsItem?.score || 0} point by {newsItem?.by || "user"}
         </Text>
         {newsItem?.time ? (
           <Text style={styles.timeText}>{relativeTime}</Text>
@@ -44,8 +44,8 @@ const makeStyles = (colors: Colors) =>
       elevation: 3,
     },
     titleText: {
-      fontSize: fontSize.body,
-      fontWeight: typography.semiBold,
+      fontSize: fontSize.h4,
+      fontFamily: typography.bold,
       color: colors.tertiary,
       marginBottom: spacing.xs,
     } as TextStyle,
@@ -55,11 +55,11 @@ const makeStyles = (colors: Colors) =>
       alignItems: "center",
     },
     authorText: {
-      fontSize: fontSize.body1,
+      fontSize: fontSize.body,
       color: colors.primary,
     },
     timeText: {
-      fontSize: fontSize.body2,
+      fontSize: fontSize.body,
       color: colors.primary,
     },
   });

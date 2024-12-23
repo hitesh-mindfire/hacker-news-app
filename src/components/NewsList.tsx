@@ -31,7 +31,7 @@ export const NewsList: FC<NewsListProps> = ({ newsType }) => {
   const [page, setPage] = useState(0);
   const [isFetchingMore, setIsFetchingMore] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
-
+  console.log(loading, refreshing);
   const ITEMS_PER_PAGE = 15;
 
   const newsIds = newsType === "New" ? newNewsIds : pastNewsIds;
@@ -78,6 +78,7 @@ export const NewsList: FC<NewsListProps> = ({ newsType }) => {
 
   const loadMorenews = () => {
     if (!isFetchingMore) {
+      setIsFetchingMore(true);
       setPage((prevPage) => prevPage + 1);
     }
   };
@@ -92,7 +93,7 @@ export const NewsList: FC<NewsListProps> = ({ newsType }) => {
     setRefreshing(false);
   };
 
-  if (loading && !refreshing) {
+  if (isFetchingMore && page == 0) {
     return (
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color={colors.primary} />
@@ -126,7 +127,7 @@ const makeStyles = (colors: Colors) =>
   StyleSheet.create({
     container: {
       flex: 1,
-      padding: spacing.md,
+      padding: spacing.sm,
       backgroundColor: colors.background,
     },
     list: {

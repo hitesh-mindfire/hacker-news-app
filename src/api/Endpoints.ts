@@ -4,7 +4,7 @@
 export const endPoints = {
   news: {
     newNews: "newstories.json",
-    pastNews: "beststories.json",
+    pastNews: "beststories.json", // considered beststories as past
     newNewsDetails: "item",
   },
 };

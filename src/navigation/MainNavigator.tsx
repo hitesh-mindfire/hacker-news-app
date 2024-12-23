@@ -29,6 +29,7 @@ export const MainNavigator = (props: NavigationProps) => {
   if (!fontLoaded && !error) {
     return null;
   }
+
   return (
     <NavigationContainer theme={appTheme} {...props}>
       <StackNavigator {...props} />
