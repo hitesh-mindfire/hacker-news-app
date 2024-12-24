@@ -4,7 +4,15 @@ import {
   NavigationProp,
 } from "@react-navigation/native";
 import React, { FC } from "react";
-import { View, Text, StyleSheet, TextStyle } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextStyle,
+  Platform,
+  Alert,
+  TouchableOpacity,
+} from "react-native";
 import { Colors, fontSize, spacing, typography } from "src/theme";
 import { NewsCardProps } from "src/types/NewsTypes";
 import { RootStackParamList } from "src/types";
@@ -18,9 +26,13 @@ export const NewsCard: FC<NewsCardProps> = ({ newsItem }) => {
 
   const handlePress = () => {
     if (newsItem?.url) {
-      navigation.navigate("WebViewScreen", { params: { url: newsItem.url } });
+      if (Platform.OS === "web") {
+        window.open(newsItem.url, "_blank");
+      } else {
+        navigation.navigate("WebViewScreen", { params: { url: newsItem.url } });
+      }
     } else {
-      alert("No URL available for this news.");
+      Alert.alert("News Detail is not available for this news.");
     }
   };
 
@@ -44,12 +56,12 @@ export const NewsCard: FC<NewsCardProps> = ({ newsItem }) => {
 const makeStyles = (colors: Colors) =>
   StyleSheet.create({
     item: {
-      padding: spacing.sm,
+      padding: spacing.md,
       marginLeft: spacing.sm,
       marginRight: spacing.sm,
       marginBottom: spacing.sm,
       backgroundColor: colors.backgroundSecondary,
-      borderRadius: spacing.xs,
+      borderRadius: spacing.sm,
       borderColor: colors.border,
       borderWidth: 1,
       shadowColor: colors.shadowBlue,
@@ -74,6 +86,6 @@ const makeStyles = (colors: Colors) =>
     },
     timeText: {
       fontSize: fontSize.body,
-      color: colors.primary,
+      color: colors.gray,
     },
   });

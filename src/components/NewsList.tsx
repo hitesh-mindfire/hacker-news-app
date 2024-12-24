@@ -111,7 +111,16 @@ export const NewsList: FC<NewsListProps> = ({ newsType }) => {
         contentContainerStyle={styles.list}
         onEndReached={loadMorenews}
         onEndReachedThreshold={0.5}
-        ListFooterComponent={isFetchingMore ? <Spinner loading /> : null}
+        ListFooterComponent={
+          isFetchingMore ? (
+            <View style={styles.footerContainer}>
+              <Spinner
+                loading
+                containerStyle={{ backgroundColor: colors.background }}
+              />
+            </View>
+          ) : null
+        }
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
@@ -128,7 +137,11 @@ const makeStyles = (colors: Colors) =>
       backgroundColor: colors.background,
     },
     list: {
-      paddingBottom: spacing.md,
+      paddingBottom: spacing.lg,
+    },
+    footerContainer: {
+      marginTop: spacing.sm,
+      paddingVertical: spacing.lg,
     },
     loadingContainer: {
       flex: 1,

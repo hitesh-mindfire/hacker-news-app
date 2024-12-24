@@ -1,16 +1,16 @@
 import React, { FC } from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import { faBars, faUser } from "@fortawesome/free-solid-svg-icons";
 import { useTheme } from "@react-navigation/native";
 import { Colors } from "src/theme";
 import { Platform, StyleSheet } from "react-native";
 import { DrawerParamList, TabScreenProps } from "src/types";
-import { NewsContentScreen } from "../newsContentScreen/NewsContentScreen";
-import { Header } from "src/components/Header";
+import { Header } from "src/components";
+import { NewsContentScreen } from "src/screens";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 const Drawer = createDrawerNavigator<DrawerParamList>();
 
-const NewsScreen: FC<TabScreenProps<"News">> = () => {
+const DrawerNavigator: FC<TabScreenProps<"News">> = () => {
   const { colors } = useTheme();
   const styles = makeStyle(colors);
   return (
@@ -36,9 +36,7 @@ const NewsScreen: FC<TabScreenProps<"News">> = () => {
         <Drawer.Screen
           name="New"
           component={NewsContentScreen}
-          options={{
-            title: "New news",
-          }}
+          options={{ title: "New news" }}
           initialParams={{ content: "New" }}
         />
         <Drawer.Screen
@@ -52,14 +50,14 @@ const NewsScreen: FC<TabScreenProps<"News">> = () => {
   );
 };
 
-export default NewsScreen;
+export default DrawerNavigator;
 
 const makeStyle = (colors: Colors) =>
   StyleSheet.create({
     drawerContainer: {
       backgroundColor: colors.backgroundSecondary,
-      borderEndEndRadius: 4,
-      borderEndStartRadius: 4,
-      width: Platform.OS === "android" || Platform.OS === "ios" ? "50%" : 300,
+      borderEndEndRadius: 0,
+      borderEndStartRadius: 0,
+      width: Platform.OS === "android" || Platform.OS === "ios" ? "60%" : 300,
     },
   });
