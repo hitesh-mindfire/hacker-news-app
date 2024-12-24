@@ -32,7 +32,7 @@ export const NewsCard: FC<NewsCardProps> = ({ newsItem }) => {
         navigation.navigate("WebViewScreen", { params: { url: newsItem.url } });
       }
     } else {
-      Alert.alert("News Detail is not available for this news.");
+      Alert.alert("Web View", "News Detail is not available for this news.");
     }
   };
 
