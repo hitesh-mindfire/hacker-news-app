@@ -1,6 +1,7 @@
 import { UnknownAction, combineSlices } from "@reduxjs/toolkit";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { persistedNewsReducer } from "./slices/NewsSlice";
+import { persistedUserReducer } from "../store/slices/UserSlice";
 export const RESET_STATE = "RESET_STATE";
 
 export const resetState = () => {
@@ -14,6 +15,7 @@ export const resetState = () => {
  */
 const appReducer = combineSlices({
   news: persistedNewsReducer,
+  user: persistedUserReducer,
 });
 
 /**

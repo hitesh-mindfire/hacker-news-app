@@ -39,6 +39,7 @@ interface SpinnerProps extends ActivityIndicatorProps {
    * Optional styles for the text displayed with the spinner.
    */
   textStyles?: StyleProp<TextStyle>;
+  loadingText?: boolean;
 }
 
 /**
@@ -56,6 +57,7 @@ export const Spinner = (props: SpinnerProps) => {
     containerStyle,
     spinnerStyle,
     textStyles,
+    loadingText = true,
     ...restProps
   } = props;
   const { colors } = useTheme();
@@ -106,7 +108,9 @@ export const Spinner = (props: SpinnerProps) => {
             style={styles.activityIndicatorStyle}
             {...restProps}
           />
-          <Text style={[styles.loadingText, textStyles]}>{"Loading..."}</Text>
+          {loadingText && (
+            <Text style={[styles.loadingText, textStyles]}>{"Loading..."}</Text>
+          )}
         </Animated.View>
       </Animated.View>
     );
