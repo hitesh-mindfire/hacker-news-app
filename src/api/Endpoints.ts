@@ -7,4 +7,7 @@ export const endPoints = {
     pastNews: "beststories.json", // considered beststories as past
     newNewsDetails: "item",
   },
+  auth: {
+    userDetails: "user",
+  },
 };

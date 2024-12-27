@@ -1,37 +1,76 @@
 import React, { FC } from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { useTheme } from "@react-navigation/native";
-import { Colors } from "src/theme";
-import { Platform, StyleSheet } from "react-native";
+import { Colors, spacing, typography } from "src/theme";
+import { Platform, StyleSheet, TouchableOpacity } from "react-native";
 import { DrawerParamList, TabScreenProps } from "src/types";
-import { Header } from "src/components";
 import { NewsContentScreen } from "src/screens";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { verticalScale } from "src/utils";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "src/store/Store";
+import { clearUser } from "src/store/slices/UserSlice";
 
 const Drawer = createDrawerNavigator<DrawerParamList>();
 
-const DrawerNavigator: FC<TabScreenProps<"News">> = () => {
+const DrawerNavigator: FC<TabScreenProps<"News">> = ({ navigation }) => {
   const { colors } = useTheme();
   const styles = makeStyle(colors);
+  const dispatch = useDispatch<AppDispatch>();
+  const isLoggedIn = useSelector(
+    (state: RootState) => !!state.user.userDetails
+  );
+  const handleLogout = () => {
+    dispatch(clearUser());
+    navigation.navigate("Profile");
+  };
   return (
     <>
       <Drawer.Navigator
         initialRouteName="New"
-        screenOptions={{
+        screenOptions={({ navigation }) => ({
           headerShadowVisible: false,
-          header: ({ navigation, options }) => {
-            return (
-              <Header
-                headerText={options.title}
-                leftBtnIcon={faBars}
-                onPressLeft={navigation.openDrawer}
-              />
-            );
+          headerStyle: {
+            backgroundColor: colors.background,
+          },
+          headerTitleAlign: "center",
+          headerTitleStyle: {
+            fontSize: verticalScale(25),
+            color: colors.tertiary,
+            fontFamily: typography.semiBold,
           },
           drawerStyle: styles.drawerContainer,
           drawerActiveTintColor: colors.primary,
           drawerInactiveTintColor: colors.tertiary,
-        }}
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => navigation.openDrawer()}
+              style={{ marginLeft: spacing.md }}
+            >
+              <FontAwesomeIcon
+                icon={faBars}
+                size={20}
+                color={colors.tertiary}
+              />
+            </TouchableOpacity>
+          ),
+          headerRight: () =>
+            isLoggedIn ? (
+              <TouchableOpacity
+                onPress={handleLogout}
+                style={{
+                  marginRight: spacing.md,
+                }}
+              >
+                <FontAwesomeIcon
+                  icon={faSignOutAlt}
+                  size={20}
+                  color={colors.primary}
+                />
+              </TouchableOpacity>
+            ) : null,
+        })}
       >
         <Drawer.Screen
           name="New"
