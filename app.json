@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "hacker-news-app",
-    "slug": "hacker-news-app",
+    "slug": "googlelogin",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./src/assets/images/icon.png",
@@ -9,13 +9,15 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.myapp.notifications"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.hiteshsaini.hacker-news-app"
     },
     "web": {
       "bundler": "metro",
@@ -36,6 +38,15 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "ae48129f-fcc2-4a8f-a76d-a4869134b537"
+      }
+    },
+    "owner": "hiteshsaini"
   }
 }

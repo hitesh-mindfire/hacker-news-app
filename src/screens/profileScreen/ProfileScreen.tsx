@@ -4,18 +4,42 @@ import { useTheme } from "@react-navigation/native";
 import React, { FC } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
+import Button from "src/components/Button";
 import ProfileForm from "src/components/ProfileForm";
 import { RootState } from "src/store/Store";
 import { Colors, fontSize, spacing, typography } from "src/theme";
 import { TabScreenProps } from "src/types";
+import * as Google from "expo-auth-session/providers/google";
+import * as WebBrowser from "expo-web-browser";
+
+WebBrowser.maybeCompleteAuthSession();
 
 export const ProfileScreen: FC<TabScreenProps<"Profile">> = () => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
   const { userDetails } = useSelector((state: RootState) => state.user);
+  const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
+    clientId:
+      "1025169337694-kf0e999spu85402n1ri6bcjfl6rdluod.apps.googleusercontent.com",
+    // scopes: ["profile", "email"],
+  });
+
+  React.useEffect(() => {
+    console.log(response, "response");
+    if (response?.type === "success") {
+      const { authentication } = response;
+      console.log("Google Auth Success", authentication);
+    }
+  }, [response]);
 
   if (!userDetails) {
-    return <ProfileForm />;
+    return (
+      <Button
+        disabled={!request}
+        title="Login with Google"
+        onPress={() => promptAsync()}
+      />
+    );
   }
 
   return (
