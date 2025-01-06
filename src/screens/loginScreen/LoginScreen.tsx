@@ -1,4 +1,11 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  Platform,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import React, { useEffect, useCallback } from "react";
 import * as Google from "expo-auth-session/providers/google";
 import * as WebBrowser from "expo-web-browser";
@@ -48,7 +55,6 @@ const LoginScreen = () => {
           Please log in to view your profile
         </Text>
       </View>
-      {/* Spacer to push the login button to the bottom */}
       <View style={{ flex: 1 }} />
       <TouchableOpacity
         onPress={() => promptAsync()}
@@ -79,6 +85,7 @@ const makeStyle = (colors: Colors) =>
       alignItems: "center",
       justifyContent: "center",
       marginBottom: spacing.xl,
+      marginTop: Platform.OS === "ios" ? StatusBar.currentHeight || 60 : 0,
     },
     title: {
       fontSize: fontSize.h1,
