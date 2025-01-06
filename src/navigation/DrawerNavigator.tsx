@@ -5,26 +5,15 @@ import { Colors, spacing, typography } from "src/theme";
 import { Platform, StyleSheet, TouchableOpacity } from "react-native";
 import { DrawerParamList, TabScreenProps } from "src/types";
 import { NewsContentScreen } from "src/screens";
-import { faBars, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { verticalScale } from "src/utils";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "src/store/Store";
-import { clearUser } from "src/store/slices/UserSlice";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
 const Drawer = createDrawerNavigator<DrawerParamList>();
 
 const DrawerNavigator: FC<TabScreenProps<"News">> = ({ navigation }) => {
   const { colors } = useTheme();
   const styles = makeStyle(colors);
-  const dispatch = useDispatch<AppDispatch>();
-  const isLoggedIn = useSelector(
-    (state: RootState) => !!state.user.userDetails
-  );
-  const handleLogout = () => {
-    dispatch(clearUser());
-    navigation.navigate("Profile");
-  };
+
   return (
     <>
       <Drawer.Navigator
@@ -48,28 +37,9 @@ const DrawerNavigator: FC<TabScreenProps<"News">> = ({ navigation }) => {
               onPress={() => navigation.openDrawer()}
               style={{ marginLeft: spacing.md }}
             >
-              <FontAwesomeIcon
-                icon={faBars}
-                size={20}
-                color={colors.tertiary}
-              />
+              <FontAwesome6 name={"bars"} size={20} color={colors.tertiary} />
             </TouchableOpacity>
           ),
-          headerRight: () =>
-            isLoggedIn ? (
-              <TouchableOpacity
-                onPress={handleLogout}
-                style={{
-                  marginRight: spacing.md,
-                }}
-              >
-                <FontAwesomeIcon
-                  icon={faSignOutAlt}
-                  size={20}
-                  color={colors.primary}
-                />
-              </TouchableOpacity>
-            ) : null,
         })}
       >
         <Drawer.Screen

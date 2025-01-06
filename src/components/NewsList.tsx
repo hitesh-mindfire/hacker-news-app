@@ -1,16 +1,8 @@
 import React, { FC, useEffect, useState } from "react";
-import {
-  View,
-  FlatList,
-  ActivityIndicator,
-  RefreshControl,
-  StyleSheet,
-} from "react-native";
+import { View, FlatList, RefreshControl, StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-
 import { NewsCard } from "src/components/NewsCard";
 import { AppDispatch, RootState } from "src/store/Store";
-
 import { fetchNewsDetails } from "src/services";
 import { useTheme } from "@react-navigation/native";
 import { Colors, spacing } from "src/theme";
@@ -61,7 +53,7 @@ export const NewsList: FC<NewsListProps> = ({ newsType }) => {
     const end = start + ITEMS_PER_PAGE;
     const currentIds = newsIds.slice(start, end);
 
-    const newsRequests = currentIds.map(async (id) => {
+    const newsRequests = currentIds.map(async (id: number) => {
       try {
         const response: News = await fetchNewsDetails(id);
         return response;

@@ -1,23 +1,16 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import {
-  faNewspaper,
-  faSignOutAlt,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
-
 import { BottomTabParamList } from "../types";
 import { useTheme } from "@react-navigation/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Colors, fontSize, lineHeight, spacing, typography } from "src/theme";
 import { verticalScale } from "src/utils";
-import { Platform, StyleSheet, TouchableOpacity } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import DrawerNavigator from "./DrawerNavigator";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "src/store/Store";
-import { clearUser } from "src/store/slices/UserSlice";
-import { ProfileScreen } from "src/screens";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+import ProfileScreen from "src/screens/profileScreen/ProfileScreen";
+import { useAppSelector } from "src/store/Store";
+import { IsAuthenticated } from "src/store";
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -25,14 +18,8 @@ export const TabNavigator = () => {
   const { colors } = useTheme();
   const styles = makeStyles(colors);
   const insets = useSafeAreaInsets();
-  const dispatch = useDispatch<AppDispatch>();
-  const isLoggedIn = useSelector(
-    (state: RootState) => !!state.user.userDetails
-  );
-  console.log(isLoggedIn, "login");
-  const handleLogout = () => {
-    dispatch(clearUser());
-  };
+  const userIsAuthenticated = useAppSelector(IsAuthenticated);
+
   return (
     <Tab.Navigator
       initialRouteName="News"
@@ -54,21 +41,6 @@ export const TabNavigator = () => {
               : verticalScale(spacing.xs),
           },
         ],
-        headerRight: () =>
-          isLoggedIn ? (
-            <TouchableOpacity
-              onPress={handleLogout}
-              style={{
-                marginRight: spacing.md,
-              }}
-            >
-              <FontAwesomeIcon
-                icon={faSignOutAlt}
-                size={20}
-                color={colors.primary}
-              />
-            </TouchableOpacity>
-          ) : null,
         headerStyle: {
           backgroundColor: colors.background,
         },
@@ -86,7 +58,7 @@ export const TabNavigator = () => {
         component={DrawerNavigator}
         options={{
           tabBarIcon: ({ color }) => (
-            <FontAwesomeIcon icon={faNewspaper} size={20} color={color} />
+            <FontAwesome6 name={"newspaper"} size={20} color={color} />
           ),
           headerShown: false,
           title: "News",
@@ -98,9 +70,9 @@ export const TabNavigator = () => {
         component={ProfileScreen}
         options={{
           tabBarIcon: ({ color }) => (
-            <FontAwesomeIcon icon={faUser} size={20} color={color} />
+            <FontAwesome6 name={"user"} size={20} color={color} />
           ),
-          headerShown: true,
+          headerShown: userIsAuthenticated,
           title: "Profile",
         }}
       />
