@@ -1,51 +1,47 @@
 {
   "expo": {
-    "name": "hacker-news-app",
-    "slug": "googlelogin",
+    "name": "hackernewsapp",
+    "slug": "hackernewsapp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./src/assets/images/icon.png",
-    "scheme": "myapp",
-    "userInterfaceStyle": "automatic",
+    "scheme": "hackernewsapp",
+    "userInterfaceStyle": "light",
     "newArchEnabled": true,
+    "splash": {
+      "image": "./src/assets/images/splash-icon.png",
+      "resizeMode": "contain",
+      "imageWidth": 200,
+      "backgroundColor": "#ffffff"
+    },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.myapp.notifications"
+      "bundleIdentifier": "com.hiteshsaini.hackernewsapp"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.hiteshsaini.hacker-news-app"
+      "package": "com.hiteshsaini.hackernewsapp"
     },
     "web": {
       "bundler": "metro",
       "output": "static",
       "favicon": "./src/assets/images/favicon.png"
     },
-    "plugins": [
-      "expo-router",
-      [
-        "expo-splash-screen",
-        {
-          "image": "./src/assets/images/splash-icon.png",
-          "imageWidth": 200,
-          "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
-        }
-      ]
-    ],
-    "experiments": {
-      "typedRoutes": true
-    },
     "extra": {
-      "router": {
-        "origin": false
-      },
       "eas": {
-        "projectId": "ae48129f-fcc2-4a8f-a76d-a4869134b537"
-      }
+        "projectId": "06716405-6608-4d73-85f1-660bfb65da80"
+      },
+      "plugins": [
+        [
+          "@react-native-google-signin/google-signin",
+          {
+            "iosUrlScheme": "com.googleusercontent.apps.1025169337694-m58l90ncpob2nrgn5hhddi0o8sta1e4t"
+          }
+        ]
+      ]
     },
     "owner": "hiteshsaini"
   }
