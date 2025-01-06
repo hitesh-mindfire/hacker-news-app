@@ -7,14 +7,13 @@ import {
   TextInputProps,
   TouchableOpacity,
 } from "react-native";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { IconDefinition } from "@fortawesome/fontawesome-common-types";
-import { Colors, colors, fontSize, spacing } from "../theme";
+import { Colors, fontSize, spacing } from "../theme";
 import { useTheme } from "@react-navigation/native";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
 interface InputFieldProps extends TextInputProps {
   placeholder: string;
-  icon?: IconDefinition;
+  icon?: string;
   value: string;
   onChangeText: (text: string) => void;
   secureTextEntry?: boolean;
@@ -53,7 +52,7 @@ const InputField: React.FC<InputFieldProps> = ({
         />
         {icon && (
           <TouchableOpacity onPress={onIconPress} style={styles.iconContainer}>
-            <FontAwesomeIcon icon={icon} size={20} color="grey" />
+            <FontAwesome6 name={icon} size={20} color="grey" />
           </TouchableOpacity>
         )}
       </View>

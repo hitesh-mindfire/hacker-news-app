@@ -9,5 +9,6 @@ export const endPoints = {
   },
   auth: {
     userDetails: "user",
+    fetchUserDetails: "https://www.googleapis.com/userinfo/v2/me",
   },
 };

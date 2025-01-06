@@ -18,6 +18,5 @@
       "store/*": ["./src/store/*"],
       "slices/*": ["./src/store/slices/*"]
     }
-  },
-  "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"]
+  }
 }

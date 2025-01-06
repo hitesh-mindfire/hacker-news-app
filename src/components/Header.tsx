@@ -1,18 +1,17 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { useTheme } from "@react-navigation/native";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { TouchableOpacityProps } from "react-native-gesture-handler";
 import { Colors, typography } from "src/theme";
 import { verticalScale } from "src/utils";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
 export interface HeaderProps {
   headerText?: string;
   onPressLeft?: TouchableOpacityProps["onPress"];
   onPressRight?: TouchableOpacityProps["onPress"];
-  leftBtnIcon?: IconDefinition;
-  rightBtnIcon?: IconDefinition;
+  leftBtnIcon?: string;
+  rightBtnIcon?: string;
 }
 export const Header = (props: HeaderProps) => {
   const {
@@ -30,8 +29,8 @@ export const Header = (props: HeaderProps) => {
       <View style={styles.leftView}>
         {leftBtnIcon && (
           <TouchableOpacity onPress={onPressLeft}>
-            <FontAwesomeIcon
-              icon={leftBtnIcon}
+            <FontAwesome6
+              name={"arrow-left"}
               size={20}
               color={colors.tertiary}
             />
@@ -42,8 +41,8 @@ export const Header = (props: HeaderProps) => {
       <View style={styles.rightView}>
         {rightBtnIcon && (
           <TouchableOpacity onPress={onPressRight}>
-            <FontAwesomeIcon
-              icon={rightBtnIcon}
+            <FontAwesome6
+              name={"arrow-right"}
               size={20}
               color={colors.tertiary}
             />
