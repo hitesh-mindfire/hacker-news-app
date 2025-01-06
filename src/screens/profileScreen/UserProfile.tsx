@@ -2,13 +2,13 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useEffect } from "react";
 import { useTheme } from "@react-navigation/native";
 import { Colors, fontSize, typography, spacing } from "src/theme";
-import { logoutUser, selectUser } from "src/store";
+import { logoutUser, selectedUser } from "src/store";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { AppDispatch, useAppSelector } from "src/store/Store";
 import { useDispatch } from "react-redux";
 
 const UserProfile = () => {
-  const { user } = useAppSelector(selectUser);
+  const { user } = useAppSelector(selectedUser);
   const dispatch = useDispatch<AppDispatch>();
   const { colors } = useTheme();
   const styles = makeStyle(colors);
